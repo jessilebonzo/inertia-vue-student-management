@@ -1,5 +1,6 @@
 <script setup>
 import { usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3'; 
 defineProps({
   data: {
     type: Object,
@@ -7,6 +8,13 @@ defineProps({
   },
 });
 
+const updatePageNumber = (link) => {
+  let pageNumber = link.url.split('=')[1];
+
+  router.visit("/students?page=" + pageNumber, {
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -43,8 +51,9 @@ defineProps({
                                 aria-label="Pagination"
                             >
                                 <button
-                                    v-for="link in data.meta.links"
-                                    :key="link.label"
+                                @click.prevent="updatePageNumber(link)"
+                                    v-for="(link,index) in data.meta.links"
+                                    :key="index" :disabled="link.active ||!link.url"
                                     class="relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                                     :class="{
                                         'z-10 bg-indigo-50 border-indigo-500 text-indigo-600': link.active,
