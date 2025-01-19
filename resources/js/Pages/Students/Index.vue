@@ -1,5 +1,7 @@
 <script setup>
 import MagnifyingGlass from '@/Components/Icons/MagnifyingGlass.vue';
+import Pagination from '@/Components/Pagination.vue';
+import { usePage } from '@inertiajs/vue3';
 
 defineProps({
       students: {
@@ -7,6 +9,8 @@ defineProps({
           required: true,
       },
 });
+
+// console.log(usePage().props.students);
 </script>
 
 <template>
@@ -160,7 +164,7 @@ defineProps({
                                     </tbody>
                                 </table>
                             </div>
-                            <div>Pagination Links</div>
+                            <Pagination :data="students"/>
                         </div>
                     </div>
                 </div>
