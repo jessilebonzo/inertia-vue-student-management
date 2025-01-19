@@ -1,6 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+defineProps({
+    classes: {
+      type: Object,
+      required: true,
+    },
+})
 </script>
 
 <template>
@@ -75,7 +82,9 @@ import { Head } from '@inertiajs/vue3';
                                             <option value="">
                                                 Select a Class
                                             </option>
-                                            <option value="1">Class 1</option>
+                                            <option v-for="item in classes.data" :key="item.id" :value="item.id">
+                                              {{ item.name }}
+                                          </option>
                                         </select>
                                     </div>
 
