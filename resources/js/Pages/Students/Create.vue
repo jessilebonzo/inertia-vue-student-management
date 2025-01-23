@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { watch } from "vue";
+import { watch, ref } from "vue";
 
 defineProps({
     classes: {
@@ -21,9 +21,17 @@ const form = useForm({
 watch(
     () => form.class_id,
     (newValue) => {
-        console.log(newValue);
+        getSections(newValue);
     }
 );
+
+let sections = ref([]);
+
+const getSections = (classId) => {
+    axios.get('/api/sections?class_id=' + classId).then((response) => {
+        sections.value = (response.data);
+    });
+}
 </script>
 
 <template>
@@ -121,8 +129,12 @@ watch(
                                             <option value="">
                                                 Select a Section
                                             </option>
-                                            <option value="1">Section A</option>
-                                            <option value="1">Section B</option>
+                                            <option v-for="section in sections.data" 
+                                            :key="section.id" 
+                                            :value="section.id"
+                                            >
+                                            {{ section.name }}
+                                        </option>
                                         </select>
                                     </div>
                                 </div>
