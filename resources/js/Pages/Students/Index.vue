@@ -90,7 +90,6 @@ const deleteStudent = (studentId) => {
                             >
                                 <MagnifyingGlass />
                             </div>
-                            {{ search }}
                             <input
                                 v-model="search"
                                 type="text"
