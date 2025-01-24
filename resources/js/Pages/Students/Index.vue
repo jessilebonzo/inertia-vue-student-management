@@ -2,15 +2,20 @@
 import MagnifyingGlass from '@/Components/Icons/MagnifyingGlass.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
-import { usePage, Link } from '@inertiajs/vue3';
-
-defineProps({
+import { Link } from '@inertiajs/vue3';
+ defineProps({
       students: {
           type: Object,
           required: true,
       },
 });
 
+const editStudent = (studentId) => {
+    return {
+        href: route('students.edit', studentId),
+        class: "text-indigo-600 hover:text-indigo-900"
+    };
+};
 // console.log(usePage().props.students);
 </script>
 
@@ -157,12 +162,12 @@ defineProps({
                                                 <td
                                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                                                 >
-                                                    <a
-                                                        href="#"
-                                                        class="text-indigo-600 hover:text-indigo-900"
-                                                    >
-                                                        Edit
-                                                    </a>
+                                                <Link
+                                                    :href="route('students.edit', student.id)"
+                                                    class="text-indigo-600 hover:text-indigo-900"
+                                                >
+                                                    Edit
+                                                </Link>
                                                     <button
                                                         class="ml-2 text-indigo-600 hover:text-indigo-900"
                                                     >
