@@ -6,6 +6,7 @@ use App\Http\Resources\StudentResource;
 use App\Models\Classes;
 use App\Models\Student;
 use App\Http\Resources\ClassesResource;
+use App\Http\Requests\StoreStudentRequest;
 
 class StudentController extends Controller
 {
@@ -19,9 +20,15 @@ class StudentController extends Controller
 
     public function create()
     {
-        $classes = ClassesResource::collection(Classes::all());
         return inertia('Students/Create', [
-            'classes' => $classes,
+            'classes' => ClassesResource::collection(Classes::all())
         ]);
+    }
+
+    public function store(StoreStudentRequest $request)
+    {
+        Student::create($request->validated());
+        
+        return redirect()->route('students.index');
     }
 }

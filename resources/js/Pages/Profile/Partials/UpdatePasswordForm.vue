@@ -76,7 +76,6 @@ const updatePassword = () => {
                     class="mt-1 block w-full"
                     autocomplete="new-password"
                 />
-
                 <InputError :message="form.errors.password" class="mt-2" />
             </div>
 
