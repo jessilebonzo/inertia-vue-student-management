@@ -39,9 +39,14 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    :href="route('students.index')"
+                                    :active="route().current('students.*')"
+                                >
+                                    Students
+                                </NavLink>
                             </div>
                         </div>
-
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
                             <!-- Settings Dropdown -->
                             <div class="relative ms-3">
