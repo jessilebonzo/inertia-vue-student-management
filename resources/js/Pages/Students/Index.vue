@@ -40,6 +40,14 @@ watch(
         });
     }
 );
+watch(
+    () => search.value, 
+    (value) => {
+       if(value){
+        pageNumber.value = 1;
+       }
+    }
+);
 const editStudent = (studentId) => {
     return {
         href: route('students.edit', studentId),
