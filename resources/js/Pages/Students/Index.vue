@@ -14,6 +14,7 @@ import { ref, computed, watch } from 'vue';
 
 let search = ref(usePage().props.search), 
     pageNumber = ref(1);
+
 let studentsUrl = computed(() => {
     let url = new URL(route("students.index"));
     url.searchParams.append("page", pageNumber.value);
@@ -24,6 +25,10 @@ let studentsUrl = computed(() => {
 
     return url;
 });
+
+const updatedPageNumber = (link) => {
+    pageNumber.value = link.url.split('=')[1];
+};
 
 watch(
     () => studentsUrl.value, 
@@ -41,7 +46,7 @@ const editStudent = (studentId) => {
         class: "text-indigo-600 hover:text-indigo-900"
     };
 };
-// console.log(usePage().props.students);
+
 const deleteForm = useForm({});
 
 const deleteStudent = (studentId) => {
@@ -211,7 +216,7 @@ const deleteStudent = (studentId) => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <Pagination :data="students"/>
+                                <Pagination :data="students" :updatedPageNumber="updatedPageNumber" />
                             </div>
                         </div>
                     </div>
